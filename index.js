@@ -1,8 +1,6 @@
 import express from "express";
 import cors from "cors";
-import { Sequelize, DataTypes } from "sequelize";
-
-const sequelize = new Sequelize(process.env.PG_URI, { logging: false });
+import sequelize from "./db/index.js";
 
 const app = express();
 const port = process.env.PORT || 3000;
