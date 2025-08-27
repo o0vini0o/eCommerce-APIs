@@ -6,6 +6,4 @@ const OrderProduct = sequelize.define("OrderProduct", {
     allowNull: false,
   },
 });
-
-Order.belongsToMany(Product, { through: OrderProduct });
-Product.belongsToMany(Order, { through: OrderProduct });
+export default OrderProduct;
