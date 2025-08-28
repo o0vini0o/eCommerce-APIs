@@ -38,12 +38,12 @@ const updateCategory = async (req, res) => {
     { name },
     { where: { id }, returning: true }
   );
-  console.log("categories", categories);
+
   if (!rowCount) {
     throw new Error("Category cannot found", { cause: 404 });
   }
 
-  res.json(categories[0]);
+  res.status(204).json(categories[0]);
 };
 //********** DELETE /categories/:id **********
 const deleteCategory = async (req, res) => {
@@ -52,7 +52,7 @@ const deleteCategory = async (req, res) => {
   if (!rowCount) {
     throw new Error("Category not Found", { cause: 404 });
   }
-  res.status(204).json("Category Deleted successfully");
+  res.json({ message: "Category Deleted successfully" });
 };
 export {
   createCategory,
