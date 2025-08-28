@@ -43,3 +43,19 @@ const updateCategory = async (req, res) => {
   //  const [rowCount, users] = await User.update({ firstName, lastName, email }, { where: { id }, returning: true });
   res.json(category);
 };
+//********** DELETE /categories/:id **********
+const deleteCategory = async (req, res) => {
+  const { id } = req.params;
+  const rowCount = await Category.destroy({ where: { id: id } });
+  if (!rowCount) {
+    throw new Error("Category not Found", { cause: 404 });
+  }
+  res.status(204).json("Category Deleted successfully");
+};
+export {
+  createCategory,
+  getCategories,
+  getCategoryById,
+  updateCategory,
+  deleteCategory,
+};
