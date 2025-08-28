@@ -18,14 +18,7 @@ const getProductById = async (req, res) => {
 };
 
 //********** POST /products **********
-/* // Request
-{
-  "name": "Product 1",
-  "description": "Description of product 1",
-  "price": 19.99,
-  "categoryId": 1
-}
- } */
+
 const createProduct = async (req, res) => {
   const { name, description, price, categoryId } = req.body;
 
