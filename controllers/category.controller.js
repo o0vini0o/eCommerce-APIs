@@ -1,7 +1,7 @@
 import { Category } from "../models/index.js";
 //********** GET /categories/ **********
 const getCategories = async (req, res) => {
-  const categories = await Category.find();
+  const categories = await Category.findAll();
   res.json(categories);
 };
 
@@ -26,22 +26,24 @@ const createCategory = async (req, res) => {
   }
   const category = await Category.create({ name });
 
-  res.json(category);
+  res.status(201).json(category);
 };
 
 //********** PUT /categories/:id **********
 const updateCategory = async (req, res) => {
   const { id } = req.params;
-  // const {name}=req.body;
+  const { name } = req.body;
 
-  const category = await Category.findByPk(id);
-
-  if (!category) {
-    throw new Error("Category not found", { cause: 404 });
+  const [rowCount, categories] = await Category.update(
+    { name },
+    { where: { id }, returning: true }
+  );
+  console.log("categories", categories);
+  if (!rowCount) {
+    throw new Error("Category cannot found", { cause: 404 });
   }
-  await category.update(req.body);
-  //  const [rowCount, users] = await User.update({ firstName, lastName, email }, { where: { id }, returning: true });
-  res.json(category);
+
+  res.json(categories[0]);
 };
 //********** DELETE /categories/:id **********
 const deleteCategory = async (req, res) => {
