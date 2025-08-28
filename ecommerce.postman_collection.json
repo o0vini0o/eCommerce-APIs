@@ -1,0 +1,121 @@
+{
+  "info": {
+    "_postman_id": "e9c0b16f-bb2e-4e6b-9c39-db16b7c2e198",
+    "name": "ecommerce",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "47523768"
+  },
+  "item": [
+    {
+      "name": "http://localhost:3000/categories",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": \"hemd\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/categories",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["categories"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "get all categoties",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/categories",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["categories"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "get category by id",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/categories/:id",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["categories", ":id"],
+          "variable": [
+            {
+              "key": "id",
+              "value": "12"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "delete category by id",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/categories/:id",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["categories", ":id"],
+          "variable": [
+            {
+              "key": "id",
+              "value": "4"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "update category by id",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": \"bekleidung\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/categories/:id",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["categories", ":id"],
+          "variable": [
+            {
+              "key": "id",
+              "value": "2"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
