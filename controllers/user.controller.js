@@ -37,10 +37,10 @@ const updateUser = async (req, res) => {
   const { id } = req.params;
   const { name, email } = req.body;
 
-  const existUser = await User.findOne({ where: { email } });
+  /*   const existUser = await User.findOne({ where: { email } });
   if (existUser) {
     throw new Error("this email already exists", { cause: 409 });
-  }
+  } */
 
   const [rowCount, users] = await User.update(
     { name, email },
