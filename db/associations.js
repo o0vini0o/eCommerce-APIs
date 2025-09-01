@@ -46,4 +46,5 @@ Product.belongsToMany(Order, { through: OrderProduct }); */
 // Product.hasMany(OrderProduct, { foreignKey: 'productId' }); // Sicherstellen, dass Product auch seine OrderProduct-Beziehung kennt
 // OrderProduct.belongsTo(Product, { foreignKey: 'productId', as: 'productDetails' }); // Wichtig: ermöglicht, dass OrderProduct mit Product verknüpft ist
 
+// await sequelize.sync({force:true});
 await sequelize.sync();
