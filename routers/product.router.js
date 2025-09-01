@@ -7,11 +7,19 @@ import {
   updateProduct,
   deleteProduct,
 } from "../controllers/product.controller.js";
-productRouter.route("/").get(getProducts).post(createProduct);
+import {
+  productPostSchema,
+  productUpdateSchema,
+} from "../schemas/product.schema.js";
+import { validate } from "../middlewares/index.js";
+productRouter
+  .route("/")
+  .get(getProducts)
+  .post(validate(productPostSchema), createProduct);
 productRouter
   .route("/:id")
   .get(getProductById)
-  .put(updateProduct)
+  .put(validate(productUpdateSchema), updateProduct)
   .delete(deleteProduct);
 
 export default productRouter;

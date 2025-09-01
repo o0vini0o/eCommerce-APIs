@@ -1,4 +1,4 @@
-import { Product, Order, OrderProduct } from "../models/index.js";
+import { Product, Order, User } from "../models/index.js";
 
 //********** GET /orders/ **********
 const getOrders = async (req, res) => {
@@ -10,7 +10,7 @@ const getOrders = async (req, res) => {
 
 const getOrderById = async (req, res) => {
   const { id } = req.params;
-  const order = await Order.findByPk(id, { include: "Category" });
+  const order = await Order.findByPk(id);
   if (!order) {
     throw new Error("Order not Found", { cause: 404 });
   }
@@ -63,14 +63,7 @@ const getOrderById = async (req, res) => {
 //********** POST /orders **********
 const createOrder = async (req, res) => {
   const { userId, products } = req.body;
-  // const productIds = products.map((product) => product.productId);
-  // const foundProducts = await Product.findAll({
-  //   where: { id: { [Sequelize.Op.in]: productIds } },
-  // });
 
-  console.log(products);
-
-  console.log("halloss");
   let total = 0;
   for (const product of products) {
     const existProduct = await Product.findByPk(product.productId);
@@ -81,17 +74,31 @@ const createOrder = async (req, res) => {
     total += existProduct.price * product.quantity;
   }
 
-  const order = Order.create({ total });
+  const order = await Order.create({ userId, products, total });
+
   res.status(201).json(order);
 };
 
 //********** PUT /orders/:id **********
 const updateOrder = async (req, res) => {
   const { id } = req.params;
-  const { name, description, price, categoryId } = req.body;
+  const { userId, products } = req.body;
+  const existUser = await User.findByPk(userId);
+  console.log("existUser", existUser);
+  if (!existUser) throw new Error("User not found", { cause: 404 });
+
+  let total = 0;
+  for (const product of products) {
+    const existProduct = await Product.findByPk(product.productId);
+
+    if (!existProduct) {
+      throw new Error("Product not found", { cause: 404 });
+    }
+    total += existProduct.price * product.quantity;
+  }
 
   const [rowCount, orders] = await Order.update(
-    { name, description, price, categoryId },
+    { userId, products, total },
     { where: { id }, returning: true }
   );
 
