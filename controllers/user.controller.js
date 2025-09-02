@@ -27,7 +27,6 @@ const createUser = async (req, res) => {
     throw new Error("User already exists", { cause: 409 });
   }
   const user = await User.create({ name, email, password });
-  console.log(user);
 
   res.status(201).json({ id: user.id, name: user.name, email: user.email });
 };

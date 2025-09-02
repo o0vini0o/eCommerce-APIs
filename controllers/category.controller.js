@@ -43,7 +43,7 @@ const updateCategory = async (req, res) => {
     throw new Error("Category cannot found", { cause: 404 });
   }
 
-  res.status(204).json(categories[0]);
+  res.json(categories[0]);
 };
 //********** DELETE /categories/:id **********
 const deleteCategory = async (req, res) => {
